@@ -89,6 +89,14 @@ misrepresented as being the original software.
 #ifndef TINYFILEDIALOGS_H
 #define TINYFILEDIALOGS_H
 
+
+/* support osx */
+#ifdef _WIN32
+#define TINYFD_EXPORT __declspec(dllexport)
+#else
+#define TINYFD_EXPORT
+#endif
+
 /* #define TINYFD_NOLIB */
 /* On windows, define TINYFD_NOLIB here
 if you don't want to include the code creating the graphic dialogs.
@@ -132,7 +140,7 @@ for the graphic mode:
 for the console mode:
   dialog whiptail basicinput */
 
-__declspec(dllexport) int tinyfd_messageBox (
+TINYFD_EXPORT int tinyfd_messageBox (
 	char const * const aTitle , /* "" */
 	char const * const aMessage , /* "" may contain \n \t */
 	char const * const aDialogType , /* "ok" "okcancel" "yesno" */
@@ -140,13 +148,13 @@ __declspec(dllexport) int tinyfd_messageBox (
 	int const aDefaultButton ) ; /* 0 for cancel/no , 1 for ok/yes */
 		/* returns 0 for cancel/no , 1 for ok/yes */
 
-__declspec(dllexport) char const * tinyfd_inputBox (
+TINYFD_EXPORT char const * tinyfd_inputBox (
 	char const * const aTitle , /* "" */
 	char const * const aMessage , /* "" may NOT contain \n \t on windows */
 	char const * const aDefaultInput ) ;  /* "" , if NULL it's a passwordBox */
 		/* returns NULL on cancel */
 
-__declspec(dllexport) char const * tinyfd_saveFileDialog (
+TINYFD_EXPORT char const * tinyfd_saveFileDialog (
 	char const * const aTitle , /* "" */
 	char const * const aDefaultPathAndFile , /* "" */
 	int const aNumOfFilterPatterns , /* 0 */
@@ -154,7 +162,7 @@ __declspec(dllexport) char const * tinyfd_saveFileDialog (
 	char const * const aSingleFilterDescription ) ; /* NULL | "text files" */
 		/* returns NULL on cancel */
 
-__declspec(dllexport) char const * tinyfd_openFileDialog (
+TINYFD_EXPORT char const * tinyfd_openFileDialog (
 	char const * const aTitle , /* "" */
 	char const * const aDefaultPathAndFile , /* "" */
 	int const aNumOfFilterPatterns , /* 0 */
@@ -164,12 +172,12 @@ __declspec(dllexport) char const * tinyfd_openFileDialog (
 		/* in case of multiple files, the separator is | */
 		/* returns NULL on cancel */
 
-__declspec(dllexport) char const * tinyfd_selectFolderDialog (
+TINYFD_EXPORT char const * tinyfd_selectFolderDialog (
 	char const * const aTitle , /* "" */
 	char const * const aDefaultPath ) ; /* "" */
 		/* returns NULL on cancel */
 
-__declspec(dllexport) char const * tinyfd_colorChooser(
+TINYFD_EXPORT char const * tinyfd_colorChooser(
 	char const * const aTitle , /* "" */
 	char const * const aDefaultHexRGB , /* NULL or "#FF0000" */
 	unsigned char const aDefaultRGB[3] , /* { 0 , 255 , 255 } */

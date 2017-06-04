@@ -1,6 +1,21 @@
 # Visual Studio 2015 cache directory
 /.vs/
 
+#XCode stuff
+DerivedData/
+
+## Various settings
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata/
+
+
 *.suo
 UnityPlatformHelper/obj/
 UnityPlatformHelper/bin/
@@ -11,3 +26,4 @@ tinyfiledialogs/x64/
 *.user
 x64/
 Release/
+
