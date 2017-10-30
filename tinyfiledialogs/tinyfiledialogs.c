@@ -104,7 +104,7 @@ misrepresented as being the original software.
  #include <conio.h>
  /*#include <io.h>*/
  #define SLASH "\\"
- int tinyfd_winUtf8 = 0 ; /* on windows string char can be 0:MBSC or 1:UTF-8 */
+ int tinyfd_winUtf8 = 1 ; /* on windows string char can be 0:MBSC or 1:UTF-8 */
 #else
  #include <limits.h>
  #include <unistd.h>
@@ -2632,18 +2632,23 @@ char const * tinyfd_openFileDialog (
 		p = tinyfd_inputBox(aTitle, "Open file","");
 	}
 
-	if ( ! p || ! strlen ( p )  )
-	{
+	// [RMS] if tinyfd_winUtf8=1, this doesn't seem to work, returns 0 for files that do exist
+	//   (maybe doesn't handle characters properly?)
+	//if ( ! p || ! strlen ( p )  )
+	//{
+	//	return NULL;
+	//}
+	//if ( aAllowMultipleSelects && strchr(p, '|') )
+	//{
+	//	p = ensureFilesExist( lBuff , p ) ;
+	//}
+	//else if ( ! fileExists (p) )
+	//{
+	//	return NULL ;
+	//}
+	if (!p)
 		return NULL;
-	}
-	if ( aAllowMultipleSelects && strchr(p, '|') )
-	{
-		p = ensureFilesExist( lBuff , p ) ;
-	}
-	else if ( ! fileExists (p) )
-	{
-		return NULL ;
-	}
+
 	/* printf ( "lBuff3: %s\n" , p ) ; */
 	return p ;
 }
